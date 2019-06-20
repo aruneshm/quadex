@@ -154,7 +154,7 @@ int main(int argc, char* argv[]) {
 
   auto inputs = fopen(argv[2], "r");
   auto outputs = fopen(argv[3], "w");
-  auto debug_file = fopen(argv[4], "w");
+  // auto debug_file = fopen(argv[4], "w");
 
   size_t n;
 
@@ -163,18 +163,18 @@ int main(int argc, char* argv[]) {
     if (elts_read == 0) { break; }
 
     printf("\n\n NEW ROUND N = %d", n);
-    fprintf(debug_file, "\n\n NEW ROUND N = %d", n);
+    // fprintf(debug_file, "\n\n NEW ROUND N = %d", n);
     std::vector<uint8_t*> x0_a0;
     std::vector<uint8_t*> x0_a1;
     for (size_t i = 0; i < n; ++i) {
       x0_a0.emplace_back(read_mnt_fq_2(inputs));
       x0_a1.emplace_back(read_mnt_fq_2(inputs));
-      if (i < 5) {
-        fprintf(debug_file, "\n Input X0_A0[%d]:", i );
-        fprint_uint8_array(debug_file, x0_a0.back(), io_bytes_per_elem);
-        fprintf(debug_file, "\n Input X0_A1[%d]:", i );
-        fprint_uint8_array(debug_file, x0_a1.back(), io_bytes_per_elem);
-      }
+      // if (i < 5) {
+      //   fprintf(debug_file, "\n Input X0_A0[%d]:", i );
+      //   fprint_uint8_array(debug_file, x0_a0.back(), io_bytes_per_elem);
+      //   fprintf(debug_file, "\n Input X0_A1[%d]:", i );
+      //   fprint_uint8_array(debug_file, x0_a1.back(), io_bytes_per_elem);
+      // }
     }
 
     std::vector<uint8_t*> y0_a0;
@@ -182,12 +182,12 @@ int main(int argc, char* argv[]) {
     for (size_t i = 0; i < n; ++i) {
       y0_a0.emplace_back(read_mnt_fq_2(inputs));
       y0_a1.emplace_back(read_mnt_fq_2(inputs));
-      if (i < 5) {
-        fprintf(debug_file, "\n Input Y1_A0[%d]:", i );
-        fprint_uint8_array(debug_file, y0_a0.back(), io_bytes_per_elem);
-        fprintf(debug_file, "\n Input Y1_A1[%d]:", i );
-        fprint_uint8_array(debug_file, y0_a1.back(), io_bytes_per_elem);
-      }
+      // if (i < 5) {
+      //   fprintf(debug_file, "\n Input Y1_A0[%d]:", i );
+      //   fprint_uint8_array(debug_file, y0_a0.back(), io_bytes_per_elem);
+      //   fprintf(debug_file, "\n Input Y1_A1[%d]:", i );
+      //   fprint_uint8_array(debug_file, y0_a1.back(), io_bytes_per_elem);
+      // }
     }
    
     //printf("\n Input 0:\n");
@@ -205,17 +205,17 @@ int main(int argc, char* argv[]) {
     //printf("\n NEW CUDA SUM \n");
     //print_uint8_array(new_res, io_bytes_per_elem);
 
-    fprintf(debug_file, "\n res.first.size() = %d, second.size() = %d, n = %d", res.first.size(), res.second.size(), n);
+    // fprintf(debug_file, "\n res.first.size() = %d, second.size() = %d, n = %d", res.first.size(), res.second.size(), n);
     fflush(stdout);
     for (size_t i = 0; i < n; ++i) {
       write_mnt_fq(res.first[i], outputs);
       write_mnt_fq(res.second[i], outputs);
-      if (i < 5) {
-        fprintf(debug_file, "\n Output[%d]_A0:", i );
-        fprint_uint8_array(debug_file, res.first[i], io_bytes_per_elem);
-        fprintf(debug_file, "\n Output[%d]_A1:", i );
-        fprint_uint8_array(debug_file, res.second[i], io_bytes_per_elem);
-      }
+      // if (i < 5) {
+      //   fprintf(debug_file, "\n Output[%d]_A0:", i );
+      //   fprint_uint8_array(debug_file, res.first[i], io_bytes_per_elem);
+      //   fprintf(debug_file, "\n Output[%d]_A1:", i );
+      //   fprint_uint8_array(debug_file, res.second[i], io_bytes_per_elem);
+      // }
     }
 
     for (size_t i = 0; i < n; ++i) {
